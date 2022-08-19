@@ -107,7 +107,7 @@ async fn publish(
         .map_err(|_| ReasonCode::NetworkError)?;
     let connection = TokioNetwork::new(connection);
     let mut config = ClientConfig::new(MQTTv5, CountingRng(20000));
-    config.add_qos(qos);
+    config.add_max_subscribe_qos(qos);
     config.add_username(USERNAME);
     config.add_password(PASSWORD);
     config.max_packet_size = 100;
@@ -139,7 +139,7 @@ async fn publish_spec(
         .map_err(|_| ReasonCode::NetworkError)?;
     let connection = TokioNetwork::new(connection);
     let mut config = ClientConfig::new(MQTTv5, CountingRng(20000));
-    config.add_qos(qos);
+    config.add_max_subscribe_qos(qos);
     config.add_username(USERNAME);
     config.add_password(PASSWORD);
     config.max_packet_size = 100;
@@ -236,7 +236,7 @@ async fn receive_multiple<const TOPICS: usize>(
         .map_err(|_| ReasonCode::NetworkError)?;
     let connection = TokioNetwork::new(connection);
     let mut config = ClientConfig::new(MQTTv5, CountingRng(20000));
-    config.add_qos(qos);
+    config.add_max_subscribe_qos(qos);
     config.add_username(USERNAME);
     config.add_password(PASSWORD);
     config.max_packet_size = 60;
@@ -263,7 +263,7 @@ async fn receive(ip: Ipv4Addr, qos: QualityOfService, topic: &str) -> Result<(),
         .map_err(|_| ReasonCode::NetworkError)?;
     let connection = TokioNetwork::new(connection);
     let mut config = ClientConfig::new(MQTTv5, CountingRng(20000));
-    config.add_qos(qos);
+    config.add_max_subscribe_qos(qos);
     config.add_username(USERNAME);
     config.add_password(PASSWORD);
     config.max_packet_size = 6000;
@@ -290,7 +290,7 @@ async fn receive_with_wrong_cred(qos: QualityOfService) -> Result<(), ReasonCode
         .map_err(|_| ReasonCode::NetworkError)?;
     let connection = TokioNetwork::new(connection);
     let mut config = ClientConfig::new(MQTTv5, CountingRng(20000));
-    config.add_qos(qos);
+    config.add_max_subscribe_qos(qos);
     config.add_username("xyz");
     config.add_password(PASSWORD);
     config.max_packet_size = 60;
@@ -329,7 +329,7 @@ async fn receive_multiple_second_unsub<const TOPICS: usize>(
         .map_err(|_| ReasonCode::NetworkError)?;
     let connection = TokioNetwork::new(connection);
     let mut config = ClientConfig::new(MQTTv5, CountingRng(20000));
-    config.add_qos(qos);
+    config.add_max_subscribe_qos(qos);
     config.add_username(USERNAME);
     config.add_password(PASSWORD);
     config.max_packet_size = 60;
