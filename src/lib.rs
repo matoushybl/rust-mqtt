@@ -35,6 +35,7 @@ pub mod session;
 pub mod types;
 
 pub use bytes::Bytes;
+pub use header::FixedHeader;
 
 #[cfg(test)]
 mod test;
